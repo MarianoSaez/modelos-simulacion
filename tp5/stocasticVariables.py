@@ -22,6 +22,3 @@ def temperature_normal(mean: float = 10, stdev : float = 5) -> float:
 
 def temperature_unif(lower: float = -20, upper: float = 50) -> float:
     return normal(lower, upper, 8)
-
-
-print(voltage())
