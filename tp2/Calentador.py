@@ -6,7 +6,7 @@ ENV_T = 15
 
 
 class Calentador:
-    def __init__(self, mass, constant, t_init, t_final, resistor, thermic_conductivity, thickness) -> None:
+    def __init__(self, mass, constant, t_init, t_final, resistor, thermic_conductivity=None, thickness=None) -> None:
         self.mass = mass
         self.constant = constant
         self.t_init = t_init
@@ -22,7 +22,7 @@ class Calentador:
         requerimientos
         """
         P = V**2 / self.resistor # Watts
-        P_PERDIDA = self.k * (ENV_T - self.t_final)
+        P_PERDIDA = self.constant * (ENV_T - self.t_final)
         Q = P * STEP # Joules
         DELTA_T = Q / (self.mass * self.constant) # Grados C
         
