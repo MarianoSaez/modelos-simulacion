@@ -1,5 +1,5 @@
 # Loop Constants
-TOTAL_TIME = 5000
+# TOTAL_TIME = 6000
 STEP = 1
 
 # Environmental constants

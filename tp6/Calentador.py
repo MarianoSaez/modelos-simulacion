@@ -1,4 +1,5 @@
 from const import *
+from Environment import Environment
 
 
 class Calentador:
@@ -11,6 +12,7 @@ class Calentador:
         self.thickness = thickness
         self.area = 2 * PI * radius * height + 2 * PI * radius**2
         self.k = thermic_conductivity
+        self.env = Environment(ENV_T)
 
     def calculate_temp(self, t) -> float:
         """
@@ -24,7 +26,7 @@ class Calentador:
         T_IDEAL = DELTA_T + self.t_init
 
         # Perdidas
-        Q_PERDIDO = STEP * ( self.k * self.area * (T_IDEAL - ENV_T) ) / self.thickness
+        Q_PERDIDO = STEP * ( self.k * self.area * (T_IDEAL - self.env.get_temp()) ) / self.thickness
         Q_REAL = Q - Q_PERDIDO
         DELTA_T_REAL = Q_REAL / (self.mass * self.constant)
         T = self.t_init + DELTA_T_REAL
@@ -35,6 +37,17 @@ class Calentador:
 
 
     def gen_data(self) -> tuple[list, list]:
-        time_axis = range(0, TOTAL_TIME, STEP)
-        temp_axis = [self.calculate_temp(x) for x in time_axis]
+        time_axis = []
+        temp_axis = []
+        t = 0
+        temp = self.calculate_temp(t)
+        while temp <= 90:
+            time_axis.append(t)
+            temp_axis.append(temp)
+            t += 1
+            temp = self.calculate_temp(t)
+        print(f"{t = }")
+            
+        # time_axis = range(0, TOTAL_TIME, STEP)
+        # temp_axis = [self.calculate_temp(x) for x in time_axis]
         return time_axis, temp_axis

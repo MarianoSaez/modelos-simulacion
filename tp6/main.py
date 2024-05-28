@@ -2,6 +2,7 @@ from Calentador import *
 from Calentador_ideal import Calentador as Calentador_ideal
 from Grapher import *
 from matplotlib.pyplot import plot
+from Environment import Environment
 
 R = 771.745 #Ohm
 
@@ -12,13 +13,10 @@ if __name__ == "__main__":
     t, T_REAL = c.gen_data()
     plt.plot(t, T_REAL)
 
-    t, T_IDEAL = c2.gen_data()
-    plt.plot(t, T_IDEAL)
-
     plt.title("Temperatura de un calentador en el tiempo")
     plt.xlabel("Tiempo (segundos)")
     plt.ylabel("Temperatura (grados Celsius)")
-    plt.legend(["Real", "Ideal"], loc="lower right")
+    plt.legend(["Real"], loc="lower right")
 
     plt.show()
 
